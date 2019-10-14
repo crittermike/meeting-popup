@@ -12,6 +12,7 @@
 		C52C2D4C234EB7DF0019E2FB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C52C2D4B234EB7DF0019E2FB /* Assets.xcassets */; };
 		C52C2D4F234EB7DF0019E2FB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C52C2D4E234EB7DF0019E2FB /* Preview Assets.xcassets */; };
 		C52C2D52234EB7DF0019E2FB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C52C2D50234EB7DF0019E2FB /* Main.storyboard */; };
+		C56ABE30234F910600AFA119 /* EventService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56ABE2F234F910600AFA119 /* EventService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +24,7 @@
 		C52C2D51234EB7DF0019E2FB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C52C2D53234EB7DF0019E2FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C52C2D54234EB7DF0019E2FB /* Meeting_Popup.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Meeting_Popup.entitlements; sourceTree = "<group>"; };
+		C56ABE2F234F910600AFA119 /* EventService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +64,7 @@
 				C52C2D53234EB7DF0019E2FB /* Info.plist */,
 				C52C2D54234EB7DF0019E2FB /* Meeting_Popup.entitlements */,
 				C52C2D4D234EB7DF0019E2FB /* Preview Content */,
+				C56ABE2F234F910600AFA119 /* EventService.swift */,
 			);
 			path = "Meeting Popup";
 			sourceTree = "<group>";
@@ -145,6 +148,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C56ABE30234F910600AFA119 /* EventService.swift in Sources */,
 				C52C2D4A234EB7DE0019E2FB /* ContentView.swift in Sources */,
 				C52C2D48234EB7DE0019E2FB /* AppDelegate.swift in Sources */,
 			);
