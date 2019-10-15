@@ -57,14 +57,15 @@ class EventService: ObservableObject {
         let nextMinute = cal.date(from: comps)
         let timer = Timer(fire: nextMinute!, interval: 60, repeats: true, block: { timer in
             let nextEvent = self.fetchNextEvent()
-            self.title = self.getTitle(event: nextEvent)
-            self.joinUrl = self.getJoinUrl(event: nextEvent)
-            self.type = self.getType(joinUrl: self.joinUrl)
-            
-            // Show the app window.
-            print("Showing app window...")
-            NSApp.unhideWithoutActivation()
-            NSApp.activate(ignoringOtherApps: true)
+            if nextEvent.title != "" {
+                self.title = self.getTitle(event: nextEvent)
+                self.joinUrl = self.getJoinUrl(event: nextEvent)
+                self.type = self.getType(joinUrl: self.joinUrl)
+                
+                // Show the app window.
+                NSApp.unhideWithoutActivation()
+                NSApp.activate(ignoringOtherApps: true)
+            }
         })
 
         RunLoop.current.add(timer, forMode: .default)
@@ -73,14 +74,27 @@ class EventService: ObservableObject {
     func fetchNextEvent() -> EKEvent {
         var nextEvent = EKEvent()
         
-        let start = Date()
-        let end = Date()
+        // Fetch a Date() object for the next minute.
+        let cal = NSCalendar.current
+        var comps = cal.dateComponents([.era, .year, .month, .day, .hour, .minute], from: Date())
+        comps.minute = comps.minute! + 1
+        let nextMinute = cal.date(from: comps)!
         
-        let predicate = self.eventStore.predicateForEvents(withStart: start, end: end, calendars: nil)
+        let dateFormatter : DateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
+        
+        let nextMinuteString = dateFormatter.string(from: nextMinute)
+        
+        let today = Date()
+        let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: Date())!
+        let predicate = self.eventStore.predicateForEvents(withStart: today, end: tomorrow, calendars: nil)
         let events = self.eventStore.events(matching: predicate)
         for event in events {
-            nextEvent = event
-            break
+            let eventMinuteString = dateFormatter.string(from: event.startDate)
+            if eventMinuteString == nextMinuteString {
+                nextEvent = event
+                break
+            }
         }
         return nextEvent
     }
@@ -88,7 +102,7 @@ class EventService: ObservableObject {
     func getTitle(event: EKEvent) -> String {
         return event.title
     }
-    
+
     func getJoinUrl(event: EKEvent) -> String {
         var joinUrl = ""
         

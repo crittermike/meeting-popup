@@ -18,21 +18,25 @@ struct ContentView: View {
             Text("Hey dummy! Join your meeting!")
                 .font(.subheadline)
                 .foregroundColor(Color.gray)
-            Text("\(eventService.title)")
+            Text(eventService.title)
                 .font(.largeTitle)
                 .foregroundColor(Color.white)
                 .padding(.top)
-            Button(action: {
-                let joinUrl = URL(string: "\(self.eventService.joinUrl)")!
-                NSWorkspace.shared.open(joinUrl)
-                print("Join button clicked")
-            }) {
-                Text("Join \(eventService.type)")
+            
+            if eventService.type != "" {
+                Button(action: {
+                    let joinUrl = URL(string: "\(self.eventService.joinUrl)")!
+                    NSWorkspace.shared.open(joinUrl)
+                    NSApp.hide(nil)
+                }) {
+                    Text("Join \(eventService.type)")
+                }
             }
+
             Button(action: {
-                print("View button clicked")
+                NSApp!.hide(nil)
             }) {
-                Text("View in calendar")
+                Text("I joined!")
             }
         }
         .padding(.all)

@@ -19,7 +19,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         // Set up the menu bar icon and menu.
         let statusBar = NSStatusBar.system
         statusBarItem = statusBar.statusItem(withLength: NSStatusItem.squareLength)
-        statusBarItem.button?.title = "⏲"
+        statusBarItem.button?.image = NSImage(named:NSImage.Name("StatusBarImage"))
         let statusBarMenu = NSMenu(title: "Meeting Popup")
         statusBarItem.menu = statusBarMenu
         statusBarMenu.addItem(
@@ -34,14 +34,13 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         // Create the window and set the content view.
         let contentView = ContentView()
         window = NSWindow(
-            contentRect: NSRect(x: 0, y: 0, width: 480, height: 300),
-            styleMask: [.titled, .closable, .miniaturizable, .resizable, .fullSizeContentView],
+            contentRect: NSRect(x: 0, y: 0, width: 1000, height: 750),
+            styleMask: [.titled, .fullSizeContentView],
             backing: .buffered, defer: false)
         window.center()
         window.setFrameAutosaveName("Main Window")
         window.contentView = NSHostingView(rootView: contentView)
-        window.titleVisibility = .hidden
-        window.titlebarAppearsTransparent = true
+        window.collectionBehavior = [.canJoinAllSpaces, .fullScreenAuxiliary]
         window.makeKeyAndOrderFront(nil)
         NSApp.hide(nil)
     }
